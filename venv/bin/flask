@@ -1,4 +1,4 @@
-#!/Users/harmankour/Desktop/azure/venv/bin/python3.11
+#!/Users/harmankour/Desktop/azure/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
