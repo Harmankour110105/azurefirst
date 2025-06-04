@@ -1,0 +1,35 @@
+name: Deploy Flask App to Azure VM
+
+on:
+  push:
+    branches:
+      - main   # or your default branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Python (optional, if needed for pip install)
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Deploy to Azure VM via SSH
+      uses: appleboy/ssh-action@v0.1.6
+      with:
+        host: ${{ secrets.AZURE_VM_HOST }}
+        username: ${{ secrets.AZURE_VM_USER }}
+        key: ${{ secrets.AZURE_VM_KEY }}
+        port: 22
+        script: |
+          cd ~/flask-app
+          git pull origin main
+          pkill gunicorn || true
+          nohup gunicorn --bind 0.0.0.0:8000 app:app &
