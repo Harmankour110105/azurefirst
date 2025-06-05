@@ -33,4 +33,7 @@ jobs:
           git pull origin main
           chmod +x start.sh
           ./start.sh
+          sleep 3
+          tail -n 20 ~/flask-app/gunicorn.log
+          ps aux | grep gunicorn
 
