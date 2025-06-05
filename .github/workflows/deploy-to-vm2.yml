@@ -35,3 +35,4 @@ jobs:
           nohup gunicorn --bind 0.0.0.0:8000 app:app > gunicorn.log 2>&1 &
           sleep 3
           curl -s http://localhost:8000 > /dev/null && echo "Gunicorn running ✅" || (echo "Gunicorn failed ❌" && cat gunicorn.log)
+          ./start.sh
