@@ -32,8 +32,8 @@ jobs:
           cd ~/flask-app
           git pull origin main
           chmod +x start.sh
-          ./start.sh
-          sleep 3
-          tail -n 20 ~/flask-app/gunicorn.log
-          ps aux | grep gunicorn
+          bash start.sh
+          sleep 5
+          curl -s http://localhost:8000 > /dev/null && echo "✅ Gunicorn running" || (echo "❌ Gunicorn failed" && cat gunicorn.log)
+
 
