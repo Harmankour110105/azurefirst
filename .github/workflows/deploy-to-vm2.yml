@@ -29,11 +29,12 @@ jobs:
         key: ${{ secrets.AZURE_VM_KEY }}
         port: 22
         script: |
-          cd ~/flask-app
+          cd /home/azureuser/flask-app
           git pull origin main
           chmod +x start.sh
           bash start.sh
           sleep 5
-          curl -s http://localhost:8000 > /dev/null && echo "✅ Gunicorn running" || (echo "❌ Gunicorn failed" && cat gunicorn.log)
-
+          echo "Checking if Gunicorn is running..."
+          curl -s http://localhost:8000 > /dev/null && echo "✅ Gunicorn is running" || (echo "❌ Gunicorn failed" && cat /home/azureuser/flask-app/gunicorn.log)
+        
 
