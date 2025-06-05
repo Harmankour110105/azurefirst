@@ -31,6 +31,7 @@ jobs:
         script: |
           cd ~/flask-app
           git pull origin main
+          pip install -r requirements.txt
           chmod +x start.sh 
           ./start.sh
           sleep 3
