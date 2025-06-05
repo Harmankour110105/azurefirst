@@ -31,5 +31,5 @@ jobs:
         script: |
           cd ~/flask-app
           git pull origin main
-          pkill gunicorn || true
+          sudo fuser -k 8000/tcp || true
           nohup gunicorn --bind 0.0.0.0:8000 app:app &
