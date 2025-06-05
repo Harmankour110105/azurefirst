@@ -20,7 +20,7 @@ jobs:
         username: ${{ secrets.AZURE_VM_USER }}
         key: ${{ secrets.AZURE_VM_PRIVATE_KEY }}
         script: |
-          cd flask-app
+          cd ~/flask-app
           git pull origin main
           pip3 install -r requirements.txt
           pkill gunicorn || true
