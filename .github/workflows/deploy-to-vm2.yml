@@ -32,4 +32,6 @@ jobs:
           cd ~/flask-app
           git pull origin main
           sudo fuser -k 8000/tcp || true
-          nohup gunicorn --bind 0.0.0.0:8000 app:app &
+          nohup gunicorn --bind 0.0.0.0:8000 app:app > gunicorn.log 2>&1 &
+          sleep 3
+          curl -s http://localhost:8000 > /dev/null && echo "Gunicorn running ✅" || (echo "Gunicorn failed ❌" && cat gunicorn.log)
