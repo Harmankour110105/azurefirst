@@ -2,12 +2,12 @@
 from flask import Flask, render_template, request,abort
 
 app = Flask(__name__)
-ALLOWED_IPS = ['your.ip.here']
+ALLOWED_IPS = ['117.210.169.244']  # or maybe hardcoded IPs
 
 @app.before_request
 def limit_remote_addr():
     if request.remote_addr not in ALLOWED_IPS:
-        abort(403)  # Forbidden
+        abort(403)
         
 @app.route('/')
 def home():
