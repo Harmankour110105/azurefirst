@@ -1,8 +1,14 @@
 # app.py
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,abort
 
 app = Flask(__name__)
+ALLOWED_IPS = ['your.ip.here']
 
+@app.before_request
+def limit_remote_addr():
+    if request.remote_addr not in ALLOWED_IPS:
+        abort(403)  # Forbidden
+        
 @app.route('/')
 def home():
     return render_template('form.html')
